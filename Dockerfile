@@ -7,14 +7,16 @@ RUN apt-get update \
  && chmod u+x /usr/local/bin/forego \
  && echo "\ndaemon off;" >> /etc/nginx/nginx.conf \
  && echo "\nerror_log /dev/stdout warn;" >> /etc/nginx/nginx.conf \
- && apt-get clean \
+ && apt-get clean
 
 WORKDIR /
 
-ADD Procfile .
-ADD upstream.conf /etc/nginx/conf.d
-ADD nginx_vhost.conf /etc/nginx/sites-enabled/default
-ADD index.php /var/www/html
+ADD . /root
+
+RUN mv /root/upstream.conf /etc/nginx/conf.d/upstream.conf \
+ && mv /root/nginx_vhost.conf /etc/nginx/sites-enabled/default \
+ && mv /root/index.php /var/www/html/index.php \
+ && mv /root/Procfile /
 
 EXPOSE 80
 
