@@ -9,9 +9,9 @@ RUN echo "\nerror_log /dev/stdout warn;" >> /etc/nginx/nginx.conf
 
 WORKDIR /
 
-COPY Procfile .
-COPY nginx_vhost.conf /etc/nginx/sites-enabled/default
-COPY upstream.conf /etc/nginx/conf.d
+ADD Procfile .
+ADD nginx_vhost.conf /etc/nginx/sites-enabled/default
+ADD upstream.conf /etc/nginx/conf.d
 
 COPY index.php /var/www/html
 
